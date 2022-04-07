@@ -22,7 +22,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AKIAUG7RTL5D2GC2B53K}}
           aws-secret-access-key: ${{ secrets.7ZLLNoRjqPZp46fU7gGAhrVoJ34Jpj0LzwPl6YF5 }}
-          aws-region: eu-west-2
+          aws-region: us-east-1
 
       - name: npm install
         run: npm i
