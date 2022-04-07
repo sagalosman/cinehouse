@@ -28,7 +28,7 @@ jobs:
         run: npm i
       
       - name: build
-        run: STAGE=dev npm run build
+        run: STAGE=dev npm run buil
       
       - name: copy files to s3
         run: aws s3 sync ./dist s3://cinehouse1
