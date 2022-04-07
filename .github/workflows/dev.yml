@@ -1,0 +1,40 @@
+name: s3 deployment
+
+on:
+  push:
+    branches: [develop] # the branch we want this to run on
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Node setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AKIAUG7RTL5D2GC2B53K}}
+          aws-secret-access-key: ${{ secrets.7ZLLNoRjqPZp46fU7gGAhrVoJ34Jpj0LzwPl6YF5 }}
+          aws-region: eu-west-2
+
+      - name: npm install
+        run: npm i
+      
+      - name: build
+        run: STAGE=dev npm run build
+      
+      - name: copy files to s3
+        run: aws s3 sync ./dist s3://cinehouse1
+
+      - name: Invalidate cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ETSS375FZIT8A \
+            --paths "/*"
