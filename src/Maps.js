@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken='pk.eyJ1Ijoic2FnYWwiLCJhIjoiY2wxZW5pYTM3MHN4ajNibnJienM1anZocyJ9.VcM3pQjqMDOD2bTkBsBwTQ';
@@ -60,7 +60,7 @@ class Map extends React.Component{
 
     data.forEach((location) => {
 			console.log(location)
-			const marker = new mapboxgl.Marker()
+			const Marker = new mapboxgl.Marker()
 							.setLngLat(location.coordinates)
 							.setPopup(new mapboxgl.Popup({ offset: 30 })
 							.setHTML('<h4>' + location.city + '</h4>' + location.location))
